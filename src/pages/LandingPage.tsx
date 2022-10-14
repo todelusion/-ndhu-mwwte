@@ -1,12 +1,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import logoPath from "../assets/LOGO.png";
+import aboutImagePath from "../assets/about.png";
 import arrowDownPath from "../assets/arrow_down.svg";
 
 const LandingPage = (): JSX.Element => {
   const { scrollY } = useScroll();
-  const arrowDownY = useTransform(scrollY, [0, 500], [0, -150]);
-  const titleY = useTransform(scrollY, [0, 500], [0, 50]);
+  const moveY = useTransform(scrollY, [0, 500], [0, -150]);
+  const baseY = useTransform(scrollY, [0, 500], [0, 50]);
 
   return (
     <div className="font-serif text-white">
@@ -14,7 +15,7 @@ const LandingPage = (): JSX.Element => {
         <img src={logoPath} alt="logo" className="w-20" />
       </nav>
       <section className="flex-center relative h-screen font-semibold">
-        <motion.div style={{ y: titleY }}>
+        <motion.div style={{ y: baseY }}>
           <h1>
             <span className="mb-2 block font-light">國立東華大學VIP課程</span>
             <span className="text-3xl">移工與她的老人</span>
@@ -35,15 +36,15 @@ const LandingPage = (): JSX.Element => {
             repeatType: "reverse",
             duration: 0.5,
           }}
-          style={{ y: arrowDownY }}
+          style={{ y: moveY }}
           className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2"
         >
           <img src={arrowDownPath} alt="slide down" />
         </motion.div>
       </section>
-      <section className="flex-center relative h-screen font-thin">
+      <section className="flex-center lg: relative h-screen text-base font-thin lg:text-lg">
         <div className="px-14">
-          <h2 className="relative mb-10 w-max text-2xl font-semibold">
+          <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
             關於我們
             <motion.div
               initial={{ right: "100%" }}
@@ -62,8 +63,12 @@ const LandingPage = (): JSX.Element => {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 -z-10 before:absolute before:left-0 before:right-0 before:top-0 before:bottom-0 before:z-10 before:bg-slate-600/50  before:content-['']">
-          <img src="https://i.imgur.com/YtVtc7m.png" alt="about" />
+        <div className="before-position-init absolute left-0 top-1/2 -z-10 -translate-y-1/2 before:rounded-r-full before:bg-slate-700/70 before:content-[''] lg:left-1/2 lg:-translate-x-1/2 lg:before:rounded-full">
+          <img
+            src={aboutImagePath}
+            alt="about"
+            className="rounded-r-full lg:rounded-full"
+          />
         </div>
       </section>
     </div>
