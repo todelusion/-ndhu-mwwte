@@ -1,13 +1,28 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import logoPath from "../assets/LOGO.png";
-import aboutImagePath from "../assets/about.png";
+import images, { aboutPath } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
 
 const LandingPage = (): JSX.Element => {
+  const [carouselWidth, carouselWidthSet] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
   const moveY = useTransform(scrollY, [0, 500], [0, -150]);
   const baseY = useTransform(scrollY, [0, 500], [0, 50]);
+
+  useEffect(() => {
+    if (carouselRef.current === null) return;
+    const { scrollWidth, offsetWidth } = carouselRef.current;
+    carouselWidthSet(scrollWidth - offsetWidth);
+  });
+  /* 獲得每個section的 ref
+  const addToRefs = (el: HTMLElement): void => {
+    if (el === null || sectionRef.current.includes(el)) return;
+    sectionRef.current.push(el);
+    console.log(sectionRef);
+  };
+  */
 
   return (
     <div className="font-serif text-white">
@@ -42,7 +57,7 @@ const LandingPage = (): JSX.Element => {
           <img src={arrowDownPath} alt="slide down" />
         </motion.div>
       </section>
-      <section className="flex-center lg: relative h-screen text-base font-thin lg:text-lg">
+      <section className="flex-center relative h-screen text-base font-thin lg:text-lg">
         <div className="px-14">
           <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
             關於我們
@@ -53,7 +68,12 @@ const LandingPage = (): JSX.Element => {
               className="absolute bottom-0 left-0 top-[85%] -z-10 bg-primary"
             />
           </h2>
-          <div className="leading-7 tracking-wider">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, ease: "easeInOut", duration: 0.5 }}
+            className="leading-7 tracking-wider"
+          >
             <p className="mb-8">
               帶領學生從移工與老人的主體經驗，重新理解老年、照顧、性別與遷移等全球化脈絡下重要的議題。
             </p>
@@ -61,15 +81,61 @@ const LandingPage = (): JSX.Element => {
               透過社會人文科學的視角，
               透過實地參與或文本、報導的閱讀，希望更加貼近並理解移工及老人在社會中的當今處境！
             </p>
-          </div>
+          </motion.div>
         </div>
-        <div className="before-position-init absolute left-0 top-1/2 -z-10 -translate-y-1/2 before:rounded-r-full before:bg-slate-700/70 before:content-[''] lg:left-1/2 lg:-translate-x-1/2 lg:before:rounded-full">
+        <div className="before-position-init absolute left-0 top-1/2 -z-10 -translate-y-1/2 before:rounded-r-full before:bg-slate-700/90 before:content-[''] lg:left-1/2 lg:-translate-x-1/2 lg:before:rounded-full">
           <img
-            src={aboutImagePath}
+            src={aboutPath}
             alt="about"
             className="rounded-r-full lg:rounded-full"
           />
         </div>
+      </section>
+      <section className="flex-col-center h-screen text-base font-thin lg:text-lg">
+        <div className="mb-10 px-14">
+          <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
+            課堂形式
+            <motion.div
+              initial={{ right: "100%" }}
+              whileInView={{ right: 0 }}
+              transition={{ delay: 0.4, ease: "easeOut" }}
+              className="absolute bottom-0 left-0 top-[85%] -z-10 bg-primary"
+            />
+          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, ease: "easeInOut", duration: 0.5 }}
+            className="leading-7 tracking-wider"
+          >
+            <p className="mb-8">
+              由老師解析課程關懷的移工與老人與社會的關係，或者分享自己在過去的研究經歷及田野調查技巧。
+            </p>
+            <p>
+              以小組形式規劃與課程報告及學習進度，透過自行排定主題、期程、計畫內容，培養同學在課程之餘的自主學習動力。
+            </p>
+          </motion.div>
+        </div>
+        <motion.div
+          ref={carouselRef}
+          className="max-w-xs cursor-grab overflow-hidden sm:max-w-md lg:max-w-5xl"
+        >
+          <motion.div
+            drag="x"
+            dragConstraints={{ right: 0, left: -carouselWidth }}
+            className="flex"
+          >
+            {images.map((image) => (
+              <div key={image} className="min-w-[200px] sm:min-w-[384px]">
+                <img
+                  src={image}
+                  alt="about"
+                  className="pointer-events-none h-full w-full rounded-full object-cover"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
       </section>
     </div>
   );
