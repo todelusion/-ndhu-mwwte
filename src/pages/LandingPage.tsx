@@ -3,19 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import logoPath from "../assets/LOGO.png";
 import images, { aboutPath } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
+import Carousel from "../components/Carousel";
 
 const LandingPage = (): JSX.Element => {
-  const [carouselWidth, carouselWidthSet] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
   const moveY = useTransform(scrollY, [0, 500], [0, -150]);
   const baseY = useTransform(scrollY, [0, 500], [0, 50]);
 
-  useEffect(() => {
-    if (carouselRef.current === null) return;
-    const { scrollWidth, offsetWidth } = carouselRef.current;
-    carouselWidthSet(scrollWidth - offsetWidth);
-  });
   /* 獲得每個section的 ref
   const addToRefs = (el: HTMLElement): void => {
     if (el === null || sectionRef.current.includes(el)) return;
@@ -83,12 +77,8 @@ const LandingPage = (): JSX.Element => {
             </p>
           </motion.div>
         </div>
-        <div className="before-position-init absolute left-0 top-1/2 -z-10 -translate-y-1/2 before:rounded-r-full before:bg-slate-700/90 before:content-[''] lg:left-1/2 lg:-translate-x-1/2 lg:before:rounded-full">
-          <img
-            src={aboutPath}
-            alt="about"
-            className="rounded-r-full lg:rounded-full"
-          />
+        <div className="before-position-init absolute left-0 top-1/2 -z-10 -translate-y-1/2 before:rounded-r-full before:bg-slate-700/90 before:content-['']">
+          <img src={aboutPath} alt="about" className="rounded-r-full" />
         </div>
       </section>
       <section className="flex-col-center h-screen text-base font-thin lg:text-lg">
@@ -116,26 +106,7 @@ const LandingPage = (): JSX.Element => {
             </p>
           </motion.div>
         </div>
-        <motion.div
-          ref={carouselRef}
-          className="max-w-xs cursor-grab overflow-hidden sm:max-w-md lg:max-w-5xl"
-        >
-          <motion.div
-            drag="x"
-            dragConstraints={{ right: 0, left: -carouselWidth }}
-            className="flex"
-          >
-            {images.map((image) => (
-              <div key={image} className="min-w-[200px] sm:min-w-[384px]">
-                <img
-                  src={image}
-                  alt="about"
-                  className="pointer-events-none h-full w-full rounded-full object-cover"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
+        <Carousel items={images} />
       </section>
     </div>
   );
