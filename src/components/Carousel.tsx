@@ -43,6 +43,8 @@ const Carousel = ({ items }: ICarouselProps): JSX.Element => {
         className="max-w-xs cursor-grab overflow-hidden sm:max-w-md lg:max-w-5xl"
       >
         <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: 100 }}
           drag="x"
           dragConstraints={{ right: 0, left: -leftConstraint }}
           className="flex"
