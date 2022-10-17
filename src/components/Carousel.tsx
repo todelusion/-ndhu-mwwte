@@ -8,7 +8,6 @@ interface ICarouselProps {
 const Carousel = ({ items }: ICarouselProps): JSX.Element => {
   const [carouselKey, carouselKeySet] = useState(0);
   const [leftConstraint, leftConstraintSet] = useState(0);
-  console.log(`motion.div: ${carouselKey}, leftConstraint: ${leftConstraint}`);
 
   const handleLeftConstraint = useCallback((id: string) => {
     const el = document.getElementById(id);

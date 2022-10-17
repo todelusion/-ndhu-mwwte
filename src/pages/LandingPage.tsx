@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import logoPath from "../assets/LOGO.png";
-import images, { aboutPath } from "../assets/images";
+import images, { aboutPath, activities } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
 import Carousel from "../components/Carousel";
 
@@ -20,7 +20,7 @@ const LandingPage = (): JSX.Element => {
 
   return (
     <div className="font-serif text-white">
-      <nav className="fixed z-10 px-4 pt-8">
+      <nav className="fixed z-20 px-4 pt-8">
         <img src={logoPath} alt="logo" className="w-20" />
       </nav>
       <section className="flex-center relative h-screen font-semibold">
@@ -107,6 +107,26 @@ const LandingPage = (): JSX.Element => {
           </motion.div>
         </div>
         <Carousel items={images} />
+      </section>
+      <section className="flex-col-center h-screen text-base font-thin lg:text-lg">
+        <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
+          課堂形式
+          <motion.div
+            initial={{ right: "100%" }}
+            whileInView={{ right: 0 }}
+            transition={{ delay: 0.4, ease: "easeOut" }}
+            className="absolute bottom-0 left-0 top-[85%] -z-10 bg-primary"
+          />
+        </h2>
+        <ul className="grid grid-cols-2">
+          {activities.map((activity) => (
+            <>
+              <li key={activity.path}>
+                <img src={activity.path} alt="" />
+              </li>
+            </>
+          ))}
+        </ul>
       </section>
     </div>
   );
