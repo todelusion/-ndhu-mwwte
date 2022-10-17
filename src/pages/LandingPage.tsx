@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logoPath from "../assets/LOGO.png";
 import images, { aboutPath, activities } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
@@ -10,13 +10,25 @@ const LandingPage = (): JSX.Element => {
   const moveY = useTransform(scrollY, [0, 500], [0, -150]);
   const baseY = useTransform(scrollY, [0, 500], [0, 50]);
 
-  /* 獲得每個section的 ref
-  const addToRefs = (el: HTMLElement): void => {
-    if (el === null || sectionRef.current.includes(el)) return;
-    sectionRef.current.push(el);
-    console.log(sectionRef);
+  const fadeInVariant = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: "easeInOut",
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
   };
-  */
+  const fadeInChild = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  };
 
   return (
     <div className="font-serif text-white">
@@ -108,7 +120,7 @@ const LandingPage = (): JSX.Element => {
         </div>
         <Carousel items={images} />
       </section>
-      <section className="flex-col-center h-screen text-base font-thin lg:text-lg">
+      <section className="flex-col-center min-h-screen text-base font-thin lg:text-lg">
         <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
           課堂形式
           <motion.div
@@ -118,15 +130,28 @@ const LandingPage = (): JSX.Element => {
             className="absolute bottom-0 left-0 top-[85%] -z-10 bg-primary"
           />
         </h2>
-        <ul className="grid grid-cols-2">
+        <motion.ul
+          variants={fadeInVariant}
+          initial="hidden"
+          whileInView="visible"
+          className="grid grid-cols-2 gap-10 px-5"
+        >
           {activities.map((activity) => (
-            <>
-              <li key={activity.path}>
-                <img src={activity.path} alt="" />
-              </li>
-            </>
+            <React.Fragment key={activity.path}>
+              <motion.li
+                variants={fadeInChild}
+                className="max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+              >
+                {/* <div className="absolute z-20 h-full w-full duration-100 hover:visible hover:bg-slate-900/70" /> */}
+                <img
+                  src={activity.path}
+                  alt="activity"
+                  className="before-position-init relative h-full w-full bg-slate-500 object-cover duration-150 hover:scale-110"
+                />
+              </motion.li>
+            </React.Fragment>
           ))}
-        </ul>
+        </motion.ul>
       </section>
     </div>
   );
