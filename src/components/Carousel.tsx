@@ -3,9 +3,10 @@ import React, { useCallback, useEffect, useState } from "react";
 
 interface ICarouselProps {
   items: string[];
+  opacity?: string;
 }
 
-const Carousel = ({ items }: ICarouselProps): JSX.Element => {
+const Carousel = ({ items, opacity }: ICarouselProps): JSX.Element => {
   const [carouselKey, carouselKeySet] = useState(0);
   const [leftConstraint, leftConstraintSet] = useState(0);
 
@@ -39,7 +40,9 @@ const Carousel = ({ items }: ICarouselProps): JSX.Element => {
         onViewportLeave={() => {
           handleLeftConstraint("carouselWrapper");
         }}
-        className="max-w-xs cursor-grab overflow-hidden sm:max-w-md lg:max-w-5xl"
+        className={`max-w-xs cursor-grab overflow-hidden sm:max-w-md lg:max-w-5xl ${
+          opacity as string
+        }`}
       >
         <motion.div
           initial={{ x: 0 }}
@@ -61,6 +64,10 @@ const Carousel = ({ items }: ICarouselProps): JSX.Element => {
       </motion.div>
     </>
   );
+};
+
+Carousel.defaultProps = {
+  opacity: "opacity-100",
 };
 
 export default Carousel;

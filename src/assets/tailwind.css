@@ -9,6 +9,14 @@
     @apply bg-second font-sans; 
   }
 }
+@layer components {
+  .activity:hover img {
+    @apply scale-110 
+  }
+  .activity:hover p {
+    @apply bg-slate-900/70 opacity-100
+  }
+}
 
 @layer utilities {
   .flex-center {

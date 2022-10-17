@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import styled from "@emotion/styled";
 import logoPath from "../assets/LOGO.png";
 import images, { aboutPath, activities } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
@@ -118,7 +119,7 @@ const LandingPage = (): JSX.Element => {
             </p>
           </motion.div>
         </div>
-        <Carousel items={images} />
+        <Carousel opacity="opacity-90" items={images} />
       </section>
       <section className="flex-col-center min-h-screen text-base font-thin lg:text-lg">
         <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
@@ -140,13 +141,54 @@ const LandingPage = (): JSX.Element => {
             <React.Fragment key={activity.path}>
               <motion.li
                 variants={fadeInChild}
-                className="max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+                className="activity relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
               >
-                {/* <div className="absolute z-20 h-full w-full duration-100 hover:visible hover:bg-slate-900/70" /> */}
+                <p className="absolute z-10 h-full w-full opacity-0 duration-150">
+                  <span className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2">
+                    {activity.title}
+                  </span>
+                </p>
                 <img
                   src={activity.path}
                   alt="activity"
-                  className="before-position-init relative h-full w-full bg-slate-500 object-cover duration-150 hover:scale-110"
+                  className="h-full w-full bg-slate-500 object-cover opacity-90 duration-150"
+                />
+              </motion.li>
+            </React.Fragment>
+          ))}
+        </motion.ul>
+      </section>
+      <section className="flex-col-center min-h-screen text-base font-thin lg:text-lg">
+        <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
+          移地教學－台東聖母醫院
+          <motion.div
+            initial={{ right: "100%" }}
+            whileInView={{ right: 0 }}
+            transition={{ delay: 0.4, ease: "easeOut" }}
+            className="absolute bottom-0 left-0 top-[85%] -z-10 bg-primary"
+          />
+        </h2>
+        <motion.ul
+          variants={fadeInVariant}
+          initial="hidden"
+          whileInView="visible"
+          className="grid grid-cols-2 gap-10 px-5"
+        >
+          {activities.map((activity) => (
+            <React.Fragment key={activity.path}>
+              <motion.li
+                variants={fadeInChild}
+                className="activity relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+              >
+                <p className="absolute z-10 h-full w-full opacity-0 duration-150">
+                  <span className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2">
+                    {activity.title}
+                  </span>
+                </p>
+                <img
+                  src={activity.path}
+                  alt="activity"
+                  className="h-full w-full bg-slate-500 object-cover opacity-80 duration-150"
                 />
               </motion.li>
             </React.Fragment>
