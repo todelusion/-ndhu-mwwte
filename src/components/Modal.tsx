@@ -29,7 +29,7 @@ const Modal = ({ article, toggleModal }: IModalProps): JSX.Element => {
         animate={{ x: 0 }}
         exit={{ x: "-100%" }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        className="flex-center h-2/3 w-2/3 rounded-3xl bg-white md:rounded-full"
+        className="flex-center h-3/4 w-3/4 rounded-3xl bg-white md:rounded-full"
       >
         <p className="text-black">{article.author}</p>
         <button

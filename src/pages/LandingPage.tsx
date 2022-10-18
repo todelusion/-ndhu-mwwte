@@ -4,8 +4,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
+import React, { useState } from "react";
 import logoPath from "../assets/LOGO.png";
 import images, { aboutPath, activities, outsides } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
