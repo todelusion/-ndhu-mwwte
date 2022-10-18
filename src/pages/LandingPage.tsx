@@ -1,13 +1,32 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import logoPath from "../assets/LOGO.png";
-import images, { aboutPath, activities } from "../assets/images";
+import images, { aboutPath, activities, outsides } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
 import Carousel from "../components/Carousel";
+import Modal from "../components/Modal";
+
+const initialModalInfo = {
+  title: "",
+  path: "",
+  author: "",
+  date: "",
+  location: "",
+  descript: "",
+};
 
 const LandingPage = (): JSX.Element => {
   const { scrollY } = useScroll();
+  const [modalInfo, modalInfoSet] = useState({
+    toggle: false,
+    initialModalInfo,
+  });
   const moveY = useTransform(scrollY, [0, 500], [0, -150]);
   const baseY = useTransform(scrollY, [0, 500], [0, 50]);
 
@@ -30,13 +49,17 @@ const LandingPage = (): JSX.Element => {
       y: 0,
     },
   };
+  const toggleModal = (boolean: boolean): void => {
+    console.log("click");
+    modalInfoSet((prev) => ({ ...prev, toggle: boolean }));
+  };
 
   return (
     <div className="font-serif text-white">
       <nav className="fixed z-20 px-4 pt-8">
         <img src={logoPath} alt="logo" className="w-20" />
       </nav>
-      <section className="flex-center relative h-screen font-semibold">
+      <section className="flex-center relative min-h-screen font-semibold">
         <motion.div style={{ y: baseY }}>
           <h1>
             <span className="mb-2 block font-light">國立東華大學VIP課程</span>
@@ -64,7 +87,7 @@ const LandingPage = (): JSX.Element => {
           <img src={arrowDownPath} alt="slide down" />
         </motion.div>
       </section>
-      <section className="flex-center relative h-screen text-base font-thin lg:text-lg">
+      <section className="flex-center relative min-h-screen text-base font-thin lg:text-lg">
         <div className="px-14">
           <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
             關於我們
@@ -94,7 +117,7 @@ const LandingPage = (): JSX.Element => {
           <img src={aboutPath} alt="about" className="rounded-r-full" />
         </div>
       </section>
-      <section className="flex-col-center h-screen text-base font-thin lg:text-lg">
+      <section className="flex-col-center min-h-screen text-base font-thin lg:text-lg">
         <div className="mb-10 px-14">
           <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
             課堂形式
@@ -121,9 +144,10 @@ const LandingPage = (): JSX.Element => {
         </div>
         <Carousel opacity="opacity-90" items={images} />
       </section>
-      <section className="flex-col-center min-h-screen text-base font-thin lg:text-lg">
+
+      <section className="flex-col-center mb-10 min-h-screen text-base font-thin lg:text-lg">
         <h2 className="relative z-10 mb-10 w-max text-2xl font-semibold lg:text-4xl">
-          課堂形式
+          活動紀錄
           <motion.div
             initial={{ right: "100%" }}
             whileInView={{ right: 0 }}
@@ -141,17 +165,24 @@ const LandingPage = (): JSX.Element => {
             <React.Fragment key={activity.path}>
               <motion.li
                 variants={fadeInChild}
-                className="activity relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+                className="imgList relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+                onClick={() => {
+                  modalInfoSet((prev) => ({
+                    ...prev,
+                    toggle: true,
+                    initialModalInfo: activity,
+                  }));
+                }}
               >
-                <p className="absolute z-10 h-full w-full opacity-0 duration-150">
-                  <span className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2">
+                <p className="absolute z-10 h-full w-full opacity-0 duration-300">
+                  <span className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2 text-xs sm:text-base">
                     {activity.title}
                   </span>
                 </p>
                 <img
                   src={activity.path}
-                  alt="activity"
-                  className="h-full w-full bg-slate-500 object-cover opacity-90 duration-150"
+                  alt="imgList"
+                  className="h-full w-full bg-slate-500 object-cover opacity-90 duration-300"
                 />
               </motion.li>
             </React.Fragment>
@@ -174,19 +205,19 @@ const LandingPage = (): JSX.Element => {
           whileInView="visible"
           className="grid grid-cols-2 gap-10 px-5"
         >
-          {activities.map((activity) => (
-            <React.Fragment key={activity.path}>
+          {outsides.map((outside) => (
+            <React.Fragment key={outside.path}>
               <motion.li
                 variants={fadeInChild}
-                className="activity relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+                className="imgList relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
               >
                 <p className="absolute z-10 h-full w-full opacity-0 duration-150">
                   <span className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2">
-                    {activity.title}
+                    {outside.title}
                   </span>
                 </p>
                 <img
-                  src={activity.path}
+                  src={outside.path}
                   alt="activity"
                   className="h-full w-full bg-slate-500 object-cover opacity-80 duration-150"
                 />
@@ -195,6 +226,15 @@ const LandingPage = (): JSX.Element => {
           ))}
         </motion.ul>
       </section>
+      <AnimatePresence>
+        {modalInfo.toggle && (
+          <Modal
+            key="Modal"
+            toggleModal={toggleModal}
+            article={modalInfo.initialModalInfo}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -10,10 +10,13 @@
   }
 }
 @layer components {
-  .activity:hover img {
+  .imgList {
+    @apply cursor-pointer
+  }
+  .imgList:hover img {
     @apply scale-110 
   }
-  .activity:hover p {
+  .imgList:hover p {
     @apply bg-slate-900/70 opacity-100
   }
 }
