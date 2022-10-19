@@ -164,7 +164,7 @@ const LandingPage = (): JSX.Element => {
             <React.Fragment key={activity.path}>
               <motion.li
                 variants={fadeInChild}
-                className="imgList relative max-h-28 overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
+                className="imgList relative max-h-28 select-none overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
                 onClick={() => {
                   modalInfoSet((prev) => ({
                     ...prev,

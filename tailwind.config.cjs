@@ -16,4 +16,5 @@ module.exports = {
       dela: ["Dela Gothic One"],
     },
   },
+  plugins: [require("tailwind-scrollbar")],
 };
