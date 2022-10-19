@@ -34,9 +34,7 @@ const Modal = ({ article, toggleModal }: IModalProps): JSX.Element => {
         className="flex-end relative h-2/3 w-4/5 bg-white bg-contain bg-fixed bg-top bg-no-repeat text-black scrollbar-thin scrollbar-thumb-second/50 sm:h-2/3 lg:h-5/6 lg:w-3/4"
       >
         <ul className="absolute top-2/3 bottom-0 left-0 right-0 min-h-max rounded-t-3xl border-2 border-black bg-white px-5 py-10 font-medium md:left-20 md:right-20">
-          <li className="after-position-init relative z-10 mb-5 text-lg font-bold after:top-[85%] after:-z-10 after:bg-primary after:content-['']">
-            {article.title}
-          </li>
+          <li className="mb-5 text-lg font-bold">{article.title}</li>
           <li>講者：{article.author}</li>
           <li>時間：{article.date}</li>
           <li className="mb-20">地點：{article.location}</li>
