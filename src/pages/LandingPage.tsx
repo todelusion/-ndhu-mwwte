@@ -181,7 +181,7 @@ const LandingPage = (): JSX.Element => {
                 <img
                   src={activity.path}
                   alt="imgList"
-                  className="h-full w-full bg-slate-500 object-cover opacity-90 duration-300"
+                  className="h-full w-full rounded-full bg-slate-500 object-cover opacity-90 duration-300"
                 />
               </motion.li>
             </React.Fragment>
