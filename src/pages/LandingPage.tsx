@@ -48,9 +48,12 @@ const LandingPage = (): JSX.Element => {
       y: 0,
     },
   };
-  const toggleModal = (boolean: boolean): void => {
-    console.log("click");
-    modalInfoSet((prev) => ({ ...prev, toggle: boolean }));
+  const toggleModal = (isShow: boolean): void => {
+    const Y = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    window.scrollTo(0, parseInt(Y === "" ? "0" : Y, 10) * -1);
+    modalInfoSet((prev) => ({ ...prev, toggle: isShow }));
   };
 
   return (
@@ -166,6 +169,11 @@ const LandingPage = (): JSX.Element => {
                 variants={fadeInChild}
                 className="imgList relative max-h-28 select-none overflow-hidden rounded-full sm:max-h-40 md:max-h-80"
                 onClick={() => {
+                  console.log(window.scrollY);
+                  document.body.style.top = `-${window.scrollY}px`;
+                  document.body.style.left = "0";
+                  document.body.style.right = "0";
+                  document.body.style.position = "fixed";
                   modalInfoSet((prev) => ({
                     ...prev,
                     toggle: true,
