@@ -226,7 +226,7 @@ const LandingPage = (): JSX.Element => {
                 <img
                   src={outside.path}
                   alt="activity"
-                  className="h-full w-full bg-slate-500 object-cover opacity-80 duration-150"
+                  className="h-full w-full rounded-full bg-slate-500 object-cover opacity-80 duration-150"
                 />
               </motion.li>
             </React.Fragment>
