@@ -7,11 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "pr": "prettier -w ./src",
-    "pr-lint": "prettier-eslint --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "postinstall": "patch-package",
-    "lint": "eslint --ext \"./src/**/*.{ts,tsx,js,jsx}\"",
-    "eslint": "eslint src --ext .tsx"
+    "server": "node public/main.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
