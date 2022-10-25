@@ -1,6 +1,6 @@
 import React from "react";
 import Markdown from "react-markdown";
-import posts from "../posts.json";
+import posts from "../db/posts.json";
 
 type Props = {};
 

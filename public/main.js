@@ -19,9 +19,9 @@ const months = {
   "07": "July",
   "08": "August",
   "09": "September",
-  "10": "October",
-  "11": "November",
-  "12": "December",
+  10: "October",
+  11: "November",
+  12: "December",
 };
 
 const formatDate = (date) => {
@@ -104,7 +104,7 @@ const getPosts = () => {
             return a.id < b.id ? 1 : -1;
           });
           let data = JSON.stringify(sortedList);
-          writeFileSync("src/posts.json", data);
+          writeFileSync("src/db/posts.json", data);
         }
       });
     });
@@ -125,7 +125,7 @@ const getPages = () => {
         };
         pagelist.push(page);
         let data = JSON.stringify(pagelist);
-        writeFileSync("src/pages.json", data);
+        writeFileSync("src/db/pages.json", data);
       });
     });
   });
