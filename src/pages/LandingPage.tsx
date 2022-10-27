@@ -6,7 +6,7 @@ import {
 } from "framer-motion";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logoPath from "../assets/LOGO.png";
+
 import images, { aboutPath, activities, outsides } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
 import Carousel from "../components/Carousel";
@@ -67,9 +67,6 @@ const LandingPage = (): JSX.Element => {
       transition={{ duration: 1 }}
       className="font-serif text-white"
     >
-      <nav className="fixed z-20 px-4 pt-8">
-        <img src={logoPath} alt="logo" className="w-20" />
-      </nav>
       <section className="flex-center relative min-h-screen font-semibold">
         <motion.div style={{ y: baseY }}>
           <h1>
