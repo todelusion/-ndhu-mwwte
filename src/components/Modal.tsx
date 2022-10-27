@@ -23,7 +23,7 @@ const Modal = ({ article, toggleModal }: IModalProps): JSX.Element => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="flex-center fixed top-0 bottom-0 left-0 right-0 z-20 overflow-clip bg-black/50"
+      className="flex-center fixed top-0 left-0 bottom-0 right-0 z-20 overflow-clip bg-black/50"
     >
       <motion.div
         initial={{ x: "100%" }}

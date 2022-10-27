@@ -5,6 +5,7 @@ import {
   useTransform,
 } from "framer-motion";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import logoPath from "../assets/LOGO.png";
 import images, { aboutPath, activities, outsides } from "../assets/images";
 import arrowDownPath from "../assets/arrow_down.svg";
@@ -57,7 +58,15 @@ const LandingPage = (): JSX.Element => {
   };
 
   return (
-    <div className="font-serif text-white">
+    <motion.div
+      initial={{ x: 0, background: "rgb(44 62 80)" }}
+      exit={{
+        x: "-100vw",
+        background: "rgb(255 255 255)",
+      }}
+      transition={{ duration: 1 }}
+      className="font-serif text-white"
+    >
       <nav className="fixed z-20 px-4 pt-8">
         <img src={logoPath} alt="logo" className="w-20" />
       </nav>
@@ -70,6 +79,12 @@ const LandingPage = (): JSX.Element => {
             <span className="tracking-wider">
               Migrant works with the elderly
             </span>
+            <Link
+              to="/about"
+              className="block origin-left cursor-pointer select-none text-primary underline duration-150 hover:scale-110"
+            >
+              點此看更多…
+            </Link>
           </h1>
         </motion.div>
         <motion.div
@@ -242,7 +257,7 @@ const LandingPage = (): JSX.Element => {
           />
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
