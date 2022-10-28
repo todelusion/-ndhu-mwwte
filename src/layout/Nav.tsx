@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import logoPath from "../assets/LOGO.png";
 
 const Nav = (): JSX.Element => {
-  const [showNav, showNavSet] = useState(false);
+  const [showNav, showNavSet] = useState(true);
   console.log(showNav);
   // const [lastY, lastYSet] = useState(0);
   useEffect(() => {
@@ -13,7 +13,7 @@ const Nav = (): JSX.Element => {
       const windowY = window.scrollY;
       console.log(`windowY: ${windowY}, lastY: ${lastY}`);
       const isScrollingUp = windowY < lastY;
-      showNavSet(windowY === 0 ? false : isScrollingUp);
+      showNavSet(isScrollingUp);
       lastY = windowY; // lastY在最後一行才被賦予新的數值，所以在這行之前的lasyY都是上一個數值
     };
 
@@ -27,7 +27,7 @@ const Nav = (): JSX.Element => {
     <>
       <motion.nav
         initial={{ background: "rgba(0, 0, 0, 0.5)" }}
-        animate={{ background: `rgba(0, 0, 0, ${showNav ? "0" : "0.5"})` }}
+        animate={{ background: `rgba(0, 0, 0, ${showNav ? "0.5" : "0"})` }}
         transition={{ duration: 0.5 }}
         className="fixed z-20 w-full px-4 py-4"
       >
