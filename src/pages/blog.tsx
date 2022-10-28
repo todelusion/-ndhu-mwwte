@@ -14,10 +14,7 @@ const Blog = (props: Props) => {
 
   return (
     <>
-      <motion.div
-        style={{ y: baseY }}
-        className="relative max-h-96 w-full overflow-hidden"
-      >
+      <motion.div style={{ y: baseY }} className="relative h-96 w-full">
         <motion.div
           initial={{ opacity: 0.6 }}
           animate={{
@@ -29,7 +26,7 @@ const Blog = (props: Props) => {
         <img
           src={outside04}
           alt="banner"
-          className="block object-cover object-center"
+          className="h-full w-full object-cover object-center"
         />
       </motion.div>
       <motion.div
