@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useOutletContext } from "react-router-dom";
 import logoPath from "../assets/LOGO.png";
+interface NavContext {
+  showNav: boolean;
+}
 
 const Nav = (): JSX.Element => {
   const [showNav, showNavSet] = useState(true);
-  console.log(showNav);
-  // const [lastY, lastYSet] = useState(0);
   useEffect(() => {
     let lastY = 0;
     const handleScroll = (): void => {
       const windowY = window.scrollY;
-      console.log(`windowY: ${windowY}, lastY: ${lastY}`);
+      // console.log(`windowY: ${windowY}, lastY: ${lastY}`);
       const isScrollingUp = windowY < lastY;
       showNavSet(isScrollingUp);
       lastY = windowY; // lastY在最後一行才被賦予新的數值，所以在這行之前的lasyY都是上一個數值
@@ -23,21 +24,35 @@ const Nav = (): JSX.Element => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
-      <motion.nav
-        initial={{ background: "rgba(0, 0, 0, 0.5)" }}
-        animate={{ background: `rgba(0, 0, 0, ${showNav ? "0.5" : "0"})` }}
-        transition={{ duration: 0.5 }}
-        className="fixed z-20 w-full px-4 py-4"
-      >
+      <motion.nav className="fixed z-20 flex w-full items-center px-4 py-4 text-lg font-bold text-primary">
         <Link to="/" className="block w-max">
           <img src={logoPath} alt="logo" className="w-20" />
         </Link>
+
+        <motion.ul
+          initial={{ opacity: 1 }}
+          animate={{
+            opacity: showNav ? 1 : 0,
+            pointerEvents: showNav ? "auto" : "none",
+          }}
+          transition={{ duration: 0.3 }}
+          className="ml-10"
+        >
+          <li>
+            <Link to="/blog">活動紀錄</Link>
+          </li>
+        </motion.ul>
       </motion.nav>
-      <Outlet />
+      <Outlet context={{ showNav }} />
     </>
   );
 };
+
+export function useNav(): NavContext {
+  return useOutletContext<NavContext>();
+}
 
 export default Nav;

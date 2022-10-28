@@ -1,0 +1,92 @@
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useNav } from "../layout/Nav";
+import Markdown from "react-markdown";
+import posts from "../db/posts.json";
+import outside04 from "../assets/outside04.jpg";
+
+type Props = {};
+
+const Blog = (props: Props) => {
+  const { showNav } = useNav();
+  const { scrollY } = useScroll();
+  const moveY = useTransform(scrollY, [0, 500], [0, -150]);
+  const baseY = useTransform(scrollY, [0, 500], [0, 50]);
+
+  return (
+    <>
+      <motion.div
+        style={{ y: baseY }}
+        className="relative max-h-96 w-full overflow-hidden"
+      >
+        <motion.div
+          initial={{ opacity: 0.6 }}
+          animate={{
+            opacity: showNav ? 0.6 : 0,
+          }}
+          transition={{ duration: 0.3 }}
+          className="absolute h-full w-full bg-second"
+        />
+        <img
+          src={outside04}
+          alt="banner"
+          className="block object-cover object-center"
+        />
+      </motion.div>
+      <motion.div
+        style={{ y: moveY }}
+        className="flex-col-center absolute top-96 w-full"
+      >
+        <ul className="grid gap-10 md:grid-cols-2">
+          {posts.map((post) => (
+            <div
+              key={post.id}
+              className="flex-center relative h-72 w-96 border-2 border-black bg-white p-5"
+            >
+              <h2>{post.title}</h2>
+            </div>
+          ))}
+        </ul>
+        <ul>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+          <li>lorem50</li>
+        </ul>
+      </motion.div>
+    </>
+  );
+};
+
+export default Blog;
