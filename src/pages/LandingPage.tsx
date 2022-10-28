@@ -58,15 +58,7 @@ const LandingPage = (): JSX.Element => {
   };
 
   return (
-    <motion.div
-      initial={{ x: 0, background: "rgb(44 62 80)" }}
-      exit={{
-        x: "-100vw",
-        background: "rgb(255 255 255)",
-      }}
-      transition={{ duration: 1 }}
-      className="font-serif text-white"
-    >
+    <motion.div className="font-serif text-white">
       <section className="flex-center relative min-h-screen font-semibold">
         <motion.div style={{ y: baseY }}>
           <h1>

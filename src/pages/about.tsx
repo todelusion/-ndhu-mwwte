@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import Markdown from "react-markdown";
 import posts from "../db/posts.json";
 
@@ -8,11 +7,11 @@ type Props = {};
 const about = (props: Props) => {
   console.log("in about");
   return (
-    <motion.div
-      initial={{ x: "100vw", background: "rgb(44 62 80)" }}
-      animate={{ x: 0, background: "rgb(255 255 255)" }}
-      transition={{ duration: 1 }}
-      className="absolute top-0"
+    <div
+      // initial={{ x: "100vw" }}
+      // animate={{ x: 0 }}
+      // transition={{ duration: 1 }}
+      className="flex-col-center pt-40"
     >
       <ul className="grid gap-10 md:grid-cols-2">
         {posts.map((post) => (
@@ -21,7 +20,45 @@ const about = (props: Props) => {
           </div>
         ))}
       </ul>
-    </motion.div>
+      <ul>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+        <li>lorem50</li>
+      </ul>
+    </div>
   );
 };
 
