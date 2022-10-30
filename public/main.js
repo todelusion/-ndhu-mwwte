@@ -4,7 +4,7 @@ import { readdir, readFile, writeFileSync } from "fs";
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = dirname(__filename);
-const dirPath = join(__dirname, "../posts");
+const dirPath = join(__dirname, "../content/posts");
 const dirPathPages = join(__dirname, "../src/pages/content");
 let postlist = [];
 let pagelist = [];
