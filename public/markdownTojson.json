@@ -1,0 +1,12 @@
+{
+  "name": "posts",
+  "cwd": "./",
+  "src": "content/posts",
+  "filePattern": "**/*.md",
+  "ignore": "*(icon|input)*",
+  "dist": "src/db/output.json",
+  "metadata": true,
+  "server": false,
+  "port": 3001,
+  "deterministicOrder": false
+}

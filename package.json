@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && node public/main.js && vite build",
     "preview": "vite preview",
-    "server": "node public/main.js"
+    "server": "node public/main.js",
+    "convert": "m2j content/posts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
