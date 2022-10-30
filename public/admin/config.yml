@@ -10,7 +10,7 @@ media_folder: "public/images"
 public_folder: "/images" 
 
 # collections: https://answers.netlify.com/t/display-existing-tags-in-cms-widget/38270/2
-collections:
+
 - name: tags
   label: "標籤"
   folder: "content/tags"
