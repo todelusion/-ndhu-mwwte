@@ -11,34 +11,33 @@ public_folder: "/images"
 
 # collections: https://answers.netlify.com/t/display-existing-tags-in-cms-widget/38270/2
 
-- name: tags
-  label: "標籤"
-  folder: "content/tags"
-  create: true
-  slug: "{{tag}}"
-  identifier_field: name
-  summary: "{{tag}}"
-  fields: 
-    - {label: "標籤", name: tag}
-
-
-- name: "posts" # Used in routes, e.g., /admin/collections/blog
-  label: "隨堂筆記" # Used in the UI
-  folder: "content/posts" # The path to the folder where the documents are stored
-  create: true # Allow users to create new documents in this collection
-  slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-  fields: # The fields for each document, usually in front matter
-    - {label: "Title", name: "title", widget: "string"}
-    - {label: "Author", name: "author", widget: "string"}
-    - name: tags
-      label: "標籤"
-      widget: relation
-      collection: "tags"
-      search_fields: ["tag"]
-      value_field: "tag"
-      display_fields: ["tag"]
-      multiple: true
-    - {label: "Publish Date", name: "date", widget: "datetime"}
-    - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
-    - {label: "Body", name: "body", widget: "markdown"}
-      
+collections:
+  - name: tags
+    label: "標籤"
+    folder: "content/tags"
+    create: true
+    slug: "{{tag}}"
+    identifier_field: name
+    summary: "{{tag}}"
+    fields: 
+      - {label: "標籤", name: tag}
+  - name: "posts" # Used in routes, e.g., /admin/collections/blog
+    label: "隨堂筆記" # Used in the UI
+    folder: "content/posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Author", name: "author", widget: "string"}
+      - name: tags
+        label: "標籤"
+        widget: relation
+        collection: "tags"
+        search_fields: ["tag"]
+        value_field: "tag"
+        display_fields: ["tag"]
+        multiple: true
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+        
