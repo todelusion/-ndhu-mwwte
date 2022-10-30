@@ -108,6 +108,7 @@ const getPosts = () => {
           post = {
             id: timestamp,
             title: metadata.title ? metadata.title : "No title given",
+            collection: item.dirName,
             author: metadata.author ? metadata.author : "No author given",
             date: publishedDate ? publishedDate : "No date given",
             time: parsedDate["time"],

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNav } from "../layout/Nav";
 import Markdown from "react-markdown";
-import posts from "../db/posts.json";
+import posts from "../db/activities.json";
 import outside04 from "../assets/outside04.jpg";
 
 type Props = {};
