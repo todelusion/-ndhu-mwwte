@@ -64,7 +64,6 @@ const Nav = (): JSX.Element => {
               onClick={(e) => {
                 const button = e.target as HTMLButtonElement;
                 navigate(`/blog/${button.value}`);
-                console.log(button.value);
               }}
               className="ml-5"
             >
