@@ -1,14 +1,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNav } from "../layout/Nav";
 import Markdown from "react-markdown";
-import posts from "../db/activities.json";
+import notes from "../db/notes.json";
+import activities from "../db/activities.json";
 import outside04 from "../assets/outside04.jpg";
+import { useParams } from "react-router-dom";
 
 type Props = {};
 
 const Blog = (props: Props) => {
   const { showNav } = useNav();
   const { scrollY } = useScroll();
+  const { id } = useParams();
+  console.log(id);
   const moveY = useTransform(scrollY, [0, 500], [0, -150]);
   const baseY = useTransform(scrollY, [0, 500], [0, 50]);
 
@@ -34,7 +38,7 @@ const Blog = (props: Props) => {
         className="flex-col-center absolute top-96 w-full"
       >
         <ul className="grid gap-10 md:grid-cols-2">
-          {posts.map((post) => (
+          {activities.map((post) => (
             <div
               key={post.id}
               className="flex-center relative h-72 w-96 border-2 border-black bg-white p-5"

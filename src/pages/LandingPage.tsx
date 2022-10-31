@@ -69,7 +69,7 @@ const LandingPage = (): JSX.Element => {
               Migrant works with the elderly
             </span>
             <Link
-              to="/blog"
+              to="/blog/:activities"
               className="block origin-left cursor-pointer select-none text-primary underline duration-150 hover:scale-110"
             >
               點此看更多…

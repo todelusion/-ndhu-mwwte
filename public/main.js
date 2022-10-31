@@ -1,6 +1,6 @@
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { readdir, readFile, writeFileSync } from "fs";
+import { fstat, readdir, readFile, writeFileSync } from "fs";
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = dirname(__filename);
@@ -59,7 +59,9 @@ const formatDate = (date) => {
 };
 
 const getPosts = () => {
+  const dirNameList = [];
   dirPathArr.forEach((item) => {
+    dirNameList.push(item.dirName);
     readdir(item.dirPath, (err, files) => {
       if (err) {
         return console.log("Failed to list contents of directory: " + err);
@@ -128,6 +130,7 @@ const getPosts = () => {
       });
     });
   });
+  writeFileSync("src/db/dirNameList.json", JSON.stringify(dirNameList));
   return;
 };
 

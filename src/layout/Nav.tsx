@@ -1,13 +1,28 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useOutletContext } from "react-router-dom";
+import { Link, Outlet, useOutletContext, useNavigate } from "react-router-dom";
 import logoPath from "../assets/LOGO.png";
+import notes from "../db/notes.json";
+import dirNameList from "../db/dirNameList.json";
+
 interface NavContext {
   showNav: boolean;
 }
 
 const Nav = (): JSX.Element => {
   const [showNav, showNavSet] = useState(true);
+  const navigate = useNavigate();
+  const renderDirNameList = (name: string): string => {
+    switch (name) {
+      case "activities":
+        return "活動資訊";
+      case "notes":
+        return "課堂側寫";
+      default:
+        return "部落格";
+    }
+  };
+
   useEffect(() => {
     let lastY = 0;
     const handleScroll = (): void => {
@@ -32,19 +47,31 @@ const Nav = (): JSX.Element => {
           <img src={logoPath} alt="logo" className="w-20" />
         </Link>
 
-        <motion.ul
+        <motion.div
           initial={{ opacity: 1 }}
           animate={{
             opacity: showNav ? 1 : 0,
             pointerEvents: showNav ? "auto" : "none",
           }}
           transition={{ duration: 0.3 }}
-          className="ml-10"
+          className="ml-5"
         >
-          <li>
-            <Link to="/blog">活動紀錄</Link>
-          </li>
-        </motion.ul>
+          {dirNameList.map((name) => (
+            <button
+              key={name}
+              type="button"
+              value={name}
+              onClick={(e) => {
+                const button = e.target as HTMLButtonElement;
+                navigate(`/blog/${button.value}`);
+                console.log(button.value);
+              }}
+              className="ml-5"
+            >
+              {renderDirNameList(name)}
+            </button>
+          ))}
+        </motion.div>
       </motion.nav>
       <Outlet context={{ showNav }} />
     </>

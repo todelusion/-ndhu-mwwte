@@ -9,7 +9,7 @@ export default function Router(): JSX.Element {
     <Routes>
       <Route element={<Nav />}>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<Blog />} />
       </Route>
     </Routes>
   );
