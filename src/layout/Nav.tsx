@@ -42,7 +42,13 @@ const Nav = (): JSX.Element => {
 
   return (
     <>
-      <motion.nav className="fixed z-20 flex w-full items-center px-4 py-4 text-lg font-bold text-primary">
+      <motion.nav
+        initial={{ backgroundColor: "rgb(44, 62, 80, 0)" }}
+        animate={{
+          backgroundColor: `rgb(44, 62, 80, ${showNav ? "0.6" : "0"})`,
+        }}
+        className="fixed z-20 flex w-full items-center bg-second px-4 py-4 text-lg font-bold text-primary"
+      >
         <Link to="/" className="block w-max">
           <img src={logoPath} alt="logo" className="w-20" />
         </Link>
