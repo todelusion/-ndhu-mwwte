@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 import notes from "../db/notes.json";
 import activities from "../db/activities.json";
 import initBanner from "../assets/initBanner.jpg";
-import useBlog from "../hooks/usePost";
+import usePost from "../hooks/usePost";
 import { useEffect } from "react";
 
 export interface Post {
@@ -20,7 +20,8 @@ export interface Post {
 }
 
 const Blog = (): JSX.Element => {
-  const { handlePostSet } = useBlog();
+  const { handlePostSet } = usePost();
+
   const { scrollY } = useScroll();
   const { type } = useParams();
   const navigate = useNavigate();
