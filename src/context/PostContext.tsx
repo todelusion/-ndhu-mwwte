@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const PostProvider = ({ children }: Props): JSX.Element => {
-  const [post, postSet] = useState<Post | null>(null);
+  const [post, postSet] = useState<Post>();
   const handlePostSet = (obj: Post): void => {
     postSet(obj);
   };
